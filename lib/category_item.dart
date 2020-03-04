@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './utils.dart';
+
 class CategoryItem extends StatelessWidget {
   final String title;
   final Color color;
@@ -10,7 +12,7 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
-      child: Text(title),
+      child: Text(title, style: Theme.of(context).textTheme.headline6,),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [color.withOpacity(0.7), color],
@@ -18,6 +20,13 @@ class CategoryItem extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          width: 2,
+          color: darken(
+            color,
+            0.1,
+          ),
+        ),
       ),
     );
   }

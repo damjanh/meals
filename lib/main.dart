@@ -10,8 +10,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Meals',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          accentColor: Colors.blueAccent,
+          canvasColor: Color.fromARGB(255, 250, 250, 250),
+          textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              bodyText2: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
+              headline6: TextStyle(
+                fontSize: 20,
+                fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.bold,
+              ))),
       home: CategoriesScreen(),
     );
   }
