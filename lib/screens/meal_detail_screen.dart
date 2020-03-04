@@ -11,6 +11,10 @@ class MealDetailScreen extends StatelessWidget {
     final id = ModalRoute.of(context).settings.arguments as String;
     final Meal selectedMeal =
         DUMMY_MEALS.where((element) => element.id == id).first;
-    return Center(child: Text('Meal Detail: ${selectedMeal.title}'));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(selectedMeal.title),
+        ),
+        body: Center(child: Text('Meal Detail: ${selectedMeal.title}')));
   }
 }
