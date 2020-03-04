@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
+import './model/category.dart';
 import './utils.dart';
 import 'category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
-  final String title;
-  final Color color;
+  final Category category;
 
-  CategoryItem({this.title, this.color});
+  const CategoryItem({this.category});
 
   void _onCategorySelected(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return CategoryMealsScreen();
+      return CategoryMealsScreen(
+        categoryId: category.id,
+        categoryTitle: category.title,
+      );
     }));
   }
 
@@ -24,12 +27,12 @@ class CategoryItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         child: Text(
-          title,
+          category.title,
           style: Theme.of(context).textTheme.headline6,
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [color.withOpacity(0.7), color],
+            colors: [category.color.withOpacity(0.7), category.color],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -37,7 +40,7 @@ class CategoryItem extends StatelessWidget {
           border: Border.all(
             width: 2,
             color: darken(
-              color,
+              category.color,
               0.1,
             ),
           ),
