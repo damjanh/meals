@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../screens/meal_detail_screen.dart';
 
 import '../model/meal.dart';
+import '../screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -11,14 +12,15 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   const MealItem(
-      {@required this.title,
+      {@required this.id,
+      @required this.title,
       @required this.imageUrl,
       @required this.duration,
       @required this.complexity,
       @required this.affordability});
 
   void _onMealSelect(BuildContext context) {
-    Navigator.of(context).pushNamed(MealDetailScreen.routeName);
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
   }
 
   String get _complexityText {
@@ -34,7 +36,7 @@ class MealItem extends StatelessWidget {
   }
 
   String get _affordabilityText {
-    switch(affordability) {
+    switch (affordability) {
       case Affordability.Affordable:
         return 'Affordable';
       case Affordability.Pricey:
