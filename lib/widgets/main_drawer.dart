@@ -6,10 +6,10 @@ class MainDrawer extends StatelessWidget {
   void onDrawerItemClicked(BuildContext context, int index) {
     switch(index) {
       case 0:
-        Navigator.pop(context);
+        Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
         break;
       case 1:
-        Navigator.of(context).pushNamed(FiltersScreen.routeName);
+        Navigator.of(context).pushReplacementNamed(FiltersScreen.routeName);
         break;
       default:
         return;
