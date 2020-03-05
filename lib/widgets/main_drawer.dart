@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import '../screens/filters_screen.dart';
+import '../screens/tabs_screen.dart';
 
 class MainDrawer extends StatelessWidget {
-  void onDrawerItemClicked(int index) {
-    // TODO: Implement navigation
+  void onDrawerItemClicked(BuildContext context, int index) {
+    switch(index) {
+      case 0:
+        Navigator.pop(context);
+        break;
+      case 1:
+        Navigator.of(context).pushNamed(FiltersScreen.routeName);
+        break;
+      default:
+        return;
+    }
   }
 
   Widget _buildDrawerItem(
@@ -12,7 +23,7 @@ class MainDrawer extends StatelessWidget {
       @required int index}) {
     return ListTile(
       onTap: () {
-        onDrawerItemClicked(index);
+        onDrawerItemClicked(context, index);
       },
       leading: Icon(
         icon,
@@ -59,7 +70,7 @@ class MainDrawer extends StatelessWidget {
             context: context,
             title: 'Filters',
             icon: Icons.settings,
-            index: 0,
+            index: 1,
           ),
         ],
       ),
