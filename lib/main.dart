@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import './model/filters.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/filters_screen.dart';
 import 'screens/meal_detail_screen.dart';
 import 'screens/tabs_screen.dart';
-import './model/filters.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,11 +15,28 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Filters _filters = Filters();
+  List<String> _favorites = [];
 
   void _setFilters(Filters filters) {
     setState(() {
       _filters = filters;
     });
+  }
+
+  void _toggleFavorite(String id) {
+    final favorites = _favorites;
+    if (favorites.contains(id)) {
+      favorites.remove(id);
+    } else {
+      favorites.add(id);
+    }
+    setState(() {
+      _favorites = favorites;
+    });
+  }
+
+  bool _isMealFavorite(String id) {
+    return _favorites.contains(id);
   }
 
   @override
@@ -40,10 +57,13 @@ class _MyAppState extends State<MyApp> {
               ))),
       initialRoute: TabsScreen.routeName,
       routes: {
-        TabsScreen.routeName: (context) => TabsScreen(),
-        CategoryMealsScreen.routeName: (context) => CategoryMealsScreen(filters: _filters),
-        MealDetailScreen.routeName: (context) => MealDetailScreen(),
-        FiltersScreen.routeName: (context) => FiltersScreen(filters: _filters, onSaveFilters: _setFilters),
+        TabsScreen.routeName: (context) => TabsScreen(favorites: _favorites),
+        CategoryMealsScreen.routeName: (context) =>
+            CategoryMealsScreen(filters: _filters),
+        MealDetailScreen.routeName: (context) => MealDetailScreen(
+            toggleFavorite: _toggleFavorite, isMealFavorite: _isMealFavorite),
+        FiltersScreen.routeName: (context) =>
+            FiltersScreen(filters: _filters, onSaveFilters: _setFilters),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (context) => TabsScreen());
