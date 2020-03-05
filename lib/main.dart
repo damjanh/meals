@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 
-import 'screens/tabs_screen.dart';
 import 'screens/category_meals_screen.dart';
-import 'screens/meal_detail_screen.dart';
 import 'screens/filters_screen.dart';
+import 'screens/meal_detail_screen.dart';
+import 'screens/tabs_screen.dart';
+import './model/filters.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Filters _filters = Filters();
+
+  void _setFilters(Filters filters) {
+    setState(() {
+      _filters = filters;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,9 +41,9 @@ class MyApp extends StatelessWidget {
       initialRoute: TabsScreen.routeName,
       routes: {
         TabsScreen.routeName: (context) => TabsScreen(),
-        CategoryMealsScreen.routeName: (context) => CategoryMealsScreen(),
+        CategoryMealsScreen.routeName: (context) => CategoryMealsScreen(filters: _filters),
         MealDetailScreen.routeName: (context) => MealDetailScreen(),
-        FiltersScreen.routeName: (context) => FiltersScreen(),
+        FiltersScreen.routeName: (context) => FiltersScreen(filters: _filters, onSaveFilters: _setFilters),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (context) => TabsScreen());
