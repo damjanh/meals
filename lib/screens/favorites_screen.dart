@@ -11,15 +11,11 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Meal> favoriteMeals = DUMMY_MEALS.takeWhile((meal) {
-      bool exists = false;
-      favorites.forEach((favoriteId) {
-        if (meal.id == favoriteId) {
-          exists = true;
-        }
-      });
-      return exists;
-    }).toList();
+    List<Meal> favoriteMeals = [];
+    favorites.forEach((favoriteId) {
+      favoriteMeals
+          .add(DUMMY_MEALS.where((element) => element.id == favoriteId).first);
+    });
     return Container(
       child: Center(
         child: favorites.isEmpty
