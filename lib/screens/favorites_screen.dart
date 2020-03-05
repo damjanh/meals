@@ -36,8 +36,7 @@ class FavoritesScreen extends StatelessWidget {
                     affordability: item.affordability,
                   );
                 },
-                itemCount: favoriteMeals.length,
-              ),
+                itemCount: favoriteMeals.length),
       ),
     );
   }

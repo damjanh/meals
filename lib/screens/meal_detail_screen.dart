@@ -46,17 +46,6 @@ class MealDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedMeal.title),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => toggleFavorite(selectedMeal.id),
-            icon: Icon(
-              isMealFavorite(selectedMeal.id)
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              color: Colors.white,
-            ),
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -113,9 +102,14 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
+        child: Icon(
+          isMealFavorite(selectedMeal.id)
+              ? Icons.favorite
+              : Icons.favorite_border,
+          color: Colors.white,
+        ),
         onPressed: () {
-          Navigator.of(context).pop(selectedMeal.id);
+          toggleFavorite(selectedMeal.id);
         },
       ),
     );

@@ -33,17 +33,11 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
     }
     final filter = widget.filters;
     _displayedMeals.removeWhere((element) =>
-    (filter.gluten && !element.isGlutenFree) ||
+        (filter.gluten && !element.isGlutenFree) ||
         (filter.vegan && !element.isVegan) ||
         (filter.vegetarian && !element.isVegetarian) ||
         (filter.lactose && !element.isLactoseFree));
     super.didChangeDependencies();
-  }
-
-  void _removeMeal(String id) {
-    setState(() {
-      _displayedMeals.removeWhere((element) => element.id == id);
-    });
   }
 
   @override
@@ -62,7 +56,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
             duration: item.duration,
             complexity: item.complexity,
             affordability: item.affordability,
-            removeItem: _removeMeal,
           );
         },
         itemCount: _displayedMeals.length,
