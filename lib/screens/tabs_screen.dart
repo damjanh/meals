@@ -16,14 +16,8 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  List<Widget> _pages;
-
   @override
   void initState() {
-    _pages = [
-      CategoriesScreen(),
-      FavoritesScreen(favorites: widget.favorites),
-    ];
     super.initState();
   }
 
@@ -35,6 +29,16 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  Widget _buildScreen() {
+    switch(_selectedPageIndex) {
+      case 0:
+        return CategoriesScreen();
+      case 1:
+        return FavoritesScreen(favorites: widget.favorites);
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +46,7 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text('Meals'),
       ),
       drawer: MainDrawer(),
-      body: _pages[_selectedPageIndex],
+      body: _buildScreen(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onPageSelect,
         backgroundColor: Theme.of(context).primaryColor,

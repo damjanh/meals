@@ -21,7 +21,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     SharedPreferencesHelper.getFilters().then((value) {
-      _filters = value;
+      setState(() {
+        _filters = value;
+      });
+    });
+    SharedPreferencesHelper.getFavorites().then((value) {
+      setState(() {
+        _favorites = value;
+      });
     });
     super.initState();
   }
@@ -40,6 +47,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       favorites.add(id);
     }
+    SharedPreferencesHelper.setFavorites(favorites);
     setState(() {
       _favorites = favorites;
     });

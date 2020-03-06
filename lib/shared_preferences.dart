@@ -5,10 +5,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './model/filters.dart';
 
 class SharedPreferencesHelper {
-  static const _FILTER_LACTOSE = "filter_lactose";
-  static const _FILTER_VEGETARIAN = "filter_vegetarian";
-  static const _FILTER_VEGAN = "filter_vegan";
-  static const _FILTER_GLUTEN = "filter_gluten";
+  static const _FILTER_LACTOSE = 'filter_lactose';
+  static const _FILTER_VEGETARIAN = 'filter_vegetarian';
+  static const _FILTER_VEGAN = 'filter_vegan';
+  static const _FILTER_GLUTEN = 'filter_gluten';
+
+  static const _FAVORITES = 'favorites';
 
   static Future<SharedPreferences> get preferences =>
       SharedPreferences.getInstance();
@@ -33,5 +35,15 @@ class SharedPreferencesHelper {
 
     return Filters(
         vegan: vegan, lactose: lactose, gluten: gluten, vegetarian: vegetarian);
+  }
+
+  static Future setFavorites(List<String> favorites) async {
+    final prefs = await preferences;
+    return prefs.setStringList(_FAVORITES, favorites ?? []);
+  }
+
+  static Future<List<String>> getFavorites() async {
+    final prefs = await preferences;
+    return prefs.getStringList(_FAVORITES);
   }
 }
