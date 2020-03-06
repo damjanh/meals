@@ -5,6 +5,7 @@ import 'screens/category_meals_screen.dart';
 import 'screens/filters_screen.dart';
 import 'screens/meal_detail_screen.dart';
 import 'screens/tabs_screen.dart';
+import 'shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,10 +15,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Filters _filters = Filters();
+  Filters _filters;
   List<String> _favorites = [];
 
+  @override
+  void initState() {
+    SharedPreferencesHelper.getFilters().then((value) {
+      _filters = value;
+    });
+    super.initState();
+  }
+
   void _setFilters(Filters filters) {
+    SharedPreferencesHelper.setFilters(filters);
     setState(() {
       _filters = filters;
     });

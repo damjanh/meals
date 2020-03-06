@@ -20,10 +20,13 @@ class CategoryItem extends StatelessWidget {
       splashColor: Theme.of(context).accentColor,
       borderRadius: BorderRadius.circular(15),
       child: Container(
+        alignment: Alignment.center,
         padding: const EdgeInsets.all(15),
         child: Text(
           category.title,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline6.copyWith(
+            color: Colors.white,
+          ),
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
